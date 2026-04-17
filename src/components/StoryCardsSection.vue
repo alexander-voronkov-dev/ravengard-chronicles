@@ -18,6 +18,8 @@ const stories = getStories()
         :subtitle="story.subtitle"
         :short-description="story.shortDescription"
         :story-id="story.id"
+        :status="story.status"
+        :level="story.level"
       />
     </div>
   </section>

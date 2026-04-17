@@ -1,4 +1,8 @@
 <script setup lang="ts">
+import type { StoryStatus } from '@/composables/useStories'
+import CornerFrame from './CornerFrame.vue'
+import LevelBadge from './LevelBadge.vue'
+
 interface StoryCardProps {
   index: number
   icon: string
@@ -6,17 +10,16 @@ interface StoryCardProps {
   subtitle: string
   shortDescription: string
   storyId: string
+  status: StoryStatus
+  level?: number
 }
 
 defineProps<StoryCardProps>()
 </script>
 
 <template>
-  <RouterLink :to="`/story/${storyId}`" class="story-card">
-    <div class="corner corner--tl" />
-    <div class="corner corner--tr" />
-    <div class="corner corner--bl" />
-    <div class="corner corner--br" />
+  <RouterLink :to="`/story/${storyId}`" class="story-card" :class="`story-card--${status}`">
+    <CornerFrame />
 
     <span class="index-badge">{{ index }}</span>
 
@@ -36,6 +39,8 @@ defineProps<StoryCardProps>()
     </div>
 
     <p class="text-center text-base leading-relaxed opacity-90">{{ shortDescription }}</p>
+
+    <LevelBadge v-if="level" :level="level" class="level-badge" />
   </RouterLink>
 </template>
 
@@ -58,36 +63,6 @@ defineProps<StoryCardProps>()
     border-color unquote("color-mix(in srgb, var(--color-primary) 68%, transparent)")
     box-shadow 0 18px 34px rgba(0, 0, 0, 0.5), unquote("0 0 0 1px color-mix(in srgb, var(--color-primary) 30%, transparent)"), unquote("0 0 24px color-mix(in srgb, var(--color-primary) 45%, transparent)")
 
-.corner
-  position absolute
-  width 1rem
-  height 1rem
-  border-color unquote("color-mix(in srgb, var(--color-primary) 40%, transparent)")
-
-.corner--tl
-  top 0.55rem
-  left 0.55rem
-  border-top 1px solid
-  border-left 1px solid
-
-.corner--tr
-  top 0.55rem
-  right 0.55rem
-  border-top 1px solid
-  border-right 1px solid
-
-.corner--bl
-  bottom 0.55rem
-  left 0.55rem
-  border-bottom 1px solid
-  border-left 1px solid
-
-.corner--br
-  bottom 0.55rem
-  right 0.55rem
-  border-bottom 1px solid
-  border-right 1px solid
-
 .index-badge
   position absolute
   top 1.5rem
@@ -101,6 +76,15 @@ defineProps<StoryCardProps>()
   display inline-flex
   align-items center
   justify-content center
+
+.story-card--archived
+  opacity 0.45
+  filter grayscale(0.6)
+
+  &:hover
+    transform translateY(-2px)
+    box-shadow 0 10px 24px rgba(0, 0, 0, 0.4)
+    border-color unquote("color-mix(in srgb, var(--color-primary) 30%, transparent)")
 
 .card-title
   font-size clamp(2rem, 3vw, 2.45rem)
@@ -116,4 +100,9 @@ defineProps<StoryCardProps>()
   letter-spacing 0.17em
   font-size 0.65rem
   margin-bottom 1.2rem
+
+.level-badge
+  margin-top auto
+  display flex
+  justify-content center
 </style>
