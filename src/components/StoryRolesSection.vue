@@ -8,8 +8,8 @@ function onMouseMove(e: MouseEvent) {
   const { left, top, width, height } = card.getBoundingClientRect()
   const x = e.clientX - left
   const y = e.clientY - top
-  const rotateX = (y / height - 0.5) * -18
-  const rotateY = (x / width - 0.5) * 18
+  const rotateX = (y / height - 0.5) * -10
+  const rotateY = (x / width - 0.5) * 10
 
   card.style.transform = `perspective(700px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.03, 1.03, 1.03)`
   card.style.setProperty('--glare-x', `${(x / width) * 100}%`)
