@@ -8,7 +8,7 @@ const stories = getStories()
 
 <template>
   <section class="stories">
-    <div class="stories__grid">
+    <div class="grid grid-cols-3 gap-5 max-[1080px]:grid-cols-2 max-[760px]:grid-cols-1">
       <StoryCard
         v-for="(story, index) in stories"
         :key="story.title"
@@ -23,27 +23,8 @@ const stories = getStories()
   </section>
 </template>
 
-<style scoped>
-.stories {
-  width: 100%;
-  padding: clamp(1.4rem, 4vw, 2.2rem) 0 1rem;
-}
-
-.stories__grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: clamp(1rem, 2vw, 1.4rem);
-}
-
-@media (max-width: 1080px) {
-  .stories__grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
-@media (max-width: 760px) {
-  .stories__grid {
-    grid-template-columns: 1fr;
-  }
-}
+<style scoped lang="stylus">
+.stories
+  width 100%
+  padding clamp(1.4rem, 4vw, 2.2rem) 0 1rem
 </style>
