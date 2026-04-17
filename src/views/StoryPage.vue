@@ -2,6 +2,7 @@
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 import { useStories } from '@/composables/useStories'
+import StoryRolesSection from '@/components/StoryRolesSection.vue'
 import type { Story } from '@/composables/useStories'
 
 const { getStories } = useStories()
@@ -38,6 +39,8 @@ const storyParagraphs = computed(() => story.value?.description.split('\n\n') ??
           {{ paragraph }}
         </p>
       </section>
+
+      <StoryRolesSection v-if="story.roles" :roles="story.roles" />
     </article>
 
     <section v-else class="story-article story-article--missing">
