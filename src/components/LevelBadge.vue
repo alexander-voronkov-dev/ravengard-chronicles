@@ -3,7 +3,7 @@ defineProps<{ level: number }>()
 </script>
 
 <template>
-  <span class="level-badge">Уровень персонажей: {{ level }}</span>
+  <span class="level-badge">Рекомендованный уровень: {{ level }}</span>
 </template>
 
 <style scoped lang="stylus">
