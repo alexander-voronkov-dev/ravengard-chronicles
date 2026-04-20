@@ -3,6 +3,7 @@ import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 import { useStories } from '@/composables/useStories'
 import StoryRolesSection from '@/components/StoryRolesSection.vue'
+import StoryInfoCardsSection from '@/components/StoryInfoCardsSection.vue'
 import CornerFrame from '@/components/CornerFrame.vue'
 import LevelBadge from '@/components/LevelBadge.vue'
 
@@ -35,6 +36,7 @@ const storyParagraphs = computed(() => story.value?.description.split('\n\n') ??
         <p v-for="paragraph in storyParagraphs" :key="paragraph">{{ paragraph }}</p>
       </section>
 
+      <StoryInfoCardsSection v-if="story.infoCards" :cards="story.infoCards" />
       <StoryRolesSection v-if="story.roles" :roles="story.roles" />
     </article>
 

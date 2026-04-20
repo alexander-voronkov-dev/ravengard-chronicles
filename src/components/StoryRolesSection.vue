@@ -27,7 +27,7 @@ function onMouseLeave(e: MouseEvent) {
 <template>
   <section v-if="roles.length" class="mt-11">
     <div class="flex flex-wrap items-end gap-4 mb-4 border-b border-white/8 pb-2">
-      <h2 class="text-2xl font-bold font-['Cormorant_Garamond',serif]">Роли</h2>
+      <h2 class="text-3xl font-bold">Роли</h2>
     </div>
 
     <div class="grid gap-4 grid-cols-2 max-[760px]:grid-cols-1">
