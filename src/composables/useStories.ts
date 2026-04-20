@@ -10,6 +10,8 @@ export interface InfoCard {
 export interface GalleryImage {
   src: string
   alt?: string
+  title?: string
+  description?: string
 }
 
 export interface Story {
