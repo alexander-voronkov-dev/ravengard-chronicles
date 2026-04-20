@@ -64,9 +64,9 @@ export const useStories = (() => {
       description:
         '"Серебряный Альбатрос" возвращается домой с очередным грузом руды, когда диспетчер гильдии перенаправляет судно к шахте Кервас-7 — дальнему руднику в скальном массиве Серых Зубов. Официальная причина: шахта перестала выходить на связь трое суток назад, последний транспорт с рудой так и не прибыл в город. Контракт обязывает экипаж провести проверку.',
       gallery: [
-        { src: '/ravengard-chronicles/images/2/1.jpg', alt: 'Эвр' },
-        { src: '/ravengard-chronicles/images/2/2.jpg', alt: 'Юджин' },
-        { src: '/ravengard-chronicles/images/2/3.jpg', alt: 'Глория' },
+        { src: '/ravengard-chronicles/images/2/1.jpg', title: 'Эвр', alt: 'Эвр' },
+        { src: '/ravengard-chronicles/images/2/2.jpg', title: 'Юджин', alt: 'Юджин' },
+        { src: '/ravengard-chronicles/images/2/3.jpg', title: 'Глория', alt: 'Глория' },
       ],
       infoCards: [
         {

@@ -20,7 +20,7 @@ function closeLightbox() {
 <template>
   <section v-if="images.length" class="mt-11">
     <div class="flex flex-wrap items-end gap-4 mb-4 border-b border-white/8 pb-2">
-      <h2 class="text-3xl font-bold">Галерея</h2>
+      <h2 class="text-3xl font-bold">Персонажи</h2>
     </div>
 
     <div class="gallery">
