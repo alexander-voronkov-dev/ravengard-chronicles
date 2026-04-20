@@ -18,13 +18,6 @@ export interface Story {
   infoCards?: InfoCard[]
   status: StoryStatus
   level?: number
-  infoCards?: [
-    {
-      title: string
-      description: string
-      image?: string
-    },
-  ]
 }
 
 export interface Role {
