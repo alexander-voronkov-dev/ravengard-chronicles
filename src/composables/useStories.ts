@@ -7,6 +7,11 @@ export interface InfoCard {
   type?: InfoCardType
 }
 
+export interface GalleryImage {
+  src: string
+  alt?: string
+}
+
 export interface Story {
   id: string
   icon: string
@@ -16,15 +21,9 @@ export interface Story {
   description: string
   roles?: Role[]
   infoCards?: InfoCard[]
+  gallery?: GalleryImage[]
   status: StoryStatus
   level?: number
-  infoCards?: [
-    {
-      title: string
-      description: string
-      image?: string
-    },
-  ]
 }
 
 export interface Role {
@@ -67,16 +66,19 @@ export const useStories = (() => {
           title: '«Серебряный Альбатрос»',
           description:
             'Торговый дирижабль среднего класса, приписанный к флотилии СРК. Построен двадцать лет назад на верфях Грейвена. Несмотря на почтенный возраст, считается надёжным судном — во многом благодаря мастерству главного механика, который держит его в воздухе.',
+          image: '/ravengard-chronicles/images/2/albatross1.jpg',
         },
         {
           title: 'Шахта Кервас-7',
           description:
             'Один из дальних рудников СРК в скальном массиве Серых Зубов. Добывает электрум — редкий природный сплав, высоко ценящийся в ювелирном деле и алхимии. Шахта работает вахтовым методом: смена длится три недели, после чего экипаж меняется. Из-за удалённости и сложного рельефа добраться до Кервас-7 можно только по воздуху.',
+          image: '/ravengard-chronicles/images/2/kervas.jpg',
         },
         {
           title: 'Серые Зубы',
           description:
             'Горный хребет к северо-востоку от Грейвена. Крутые скалы, непредсказуемые восходящие потоки и частые туманы делают этот район сложным для навигации или проживания. СРК проложила здесь несколько рудных маршрутов, но пилоты эти места недолюбливают.',
+          image: '/ravengard-chronicles/images/2/grayclaw.jpg',
         },
         {
           title: 'Северная Рудная Компания (СРК)',

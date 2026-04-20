@@ -44,7 +44,8 @@ defineProps<{ cards: InfoCard[] }>()
 
 .info-card__image
   width 100%
-  height 140px
+  aspect-ratio 16 / 9
+  height auto
   object-fit cover
   display block
   border-bottom 1px solid unquote("color-mix(in srgb, var(--color-primary) 18%, transparent)")
