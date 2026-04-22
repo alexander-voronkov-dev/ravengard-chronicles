@@ -21,7 +21,8 @@ defineProps<StoryCardProps>()
   <RouterLink :to="`/story/${storyId}`" class="story-card" :class="`story-card--${status}`">
     <CornerFrame />
 
-    <span class="index-badge">{{ index }}</span>
+    <!-- <span class="index-badge">{{ index }}</span> -->
+    <span v-if="status === 'completed'" class="completed-badge">✓ Завершено</span>
 
     <div class="flex items-center justify-center mb-7">
       <span class="text-[3.5rem] leading-none text-[var(--color-primary)]" aria-hidden="true">
@@ -85,6 +86,26 @@ defineProps<StoryCardProps>()
     transform translateY(-2px)
     box-shadow 0 10px 24px rgba(0, 0, 0, 0.4)
     border-color unquote("color-mix(in srgb, var(--color-primary) 30%, transparent)")
+
+.story-card--completed
+  border-color unquote("color-mix(in srgb, #6db87a 38%, transparent)")
+
+  &:hover
+    border-color unquote("color-mix(in srgb, #6db87a 65%, transparent)")
+    box-shadow 0 18px 34px rgba(0, 0, 0, 0.5), unquote("0 0 24px color-mix(in srgb, #6db87a 28%, transparent)")
+
+.completed-badge
+  position absolute
+  top 1.45rem
+  left 1.6rem
+  padding 0.2rem 0.55rem
+  border-radius 999px
+  border 1px solid unquote("color-mix(in srgb, #6db87a 45%, transparent)")
+  background unquote("color-mix(in srgb, #6db87a 12%, transparent)")
+  color #6db87a
+  font-size 0.65rem
+  letter-spacing 0.08em
+  font-weight 600
 
 .card-title
   font-size clamp(2rem, 3vw, 2.45rem)
