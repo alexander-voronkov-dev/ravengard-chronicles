@@ -2,26 +2,6 @@
 import type { Role } from '@/composables/useStories'
 
 const { roles } = defineProps<{ roles: Role[] }>()
-
-function onMouseMove(e: MouseEvent) {
-  const card = e.currentTarget as HTMLElement
-  const { left, top, width, height } = card.getBoundingClientRect()
-  const x = e.clientX - left
-  const y = e.clientY - top
-  const rotateX = (y / height - 0.5) * -10
-  const rotateY = (x / width - 0.5) * 10
-
-  card.style.transform = `perspective(700px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.03, 1.03, 1.03)`
-  card.style.setProperty('--glare-x', `${(x / width) * 100}%`)
-  card.style.setProperty('--glare-y', `${(y / height) * 100}%`)
-  card.style.setProperty('--glare-opacity', '1')
-}
-
-function onMouseLeave(e: MouseEvent) {
-  const card = e.currentTarget as HTMLElement
-  card.style.transform = ''
-  card.style.setProperty('--glare-opacity', '0')
-}
 </script>
 
 <template>
@@ -31,13 +11,7 @@ function onMouseLeave(e: MouseEvent) {
     </div>
 
     <div class="grid gap-4 grid-cols-2 max-[760px]:grid-cols-1">
-      <article
-        v-for="role in roles"
-        :key="role.name"
-        class="role-card"
-        @mousemove="onMouseMove"
-        @mouseleave="onMouseLeave"
-      >
+      <article v-for="role in roles" :key="role.name" class="role-card">
         <div class="card-body">
           <span class="badge">{{ role.name }}</span>
 
@@ -69,32 +43,15 @@ function onMouseLeave(e: MouseEvent) {
   position relative
   overflow hidden
   border-radius 1rem
-  border 1px solid rgba(201, 165, 90, 0.2)
-  transition transform 0.4s cubic-bezier(0.03, 0.98, 0.52, 0.99)
-  will-change transform
-  cursor default
-  --glare-x 50%
-  --glare-y 50%
-  --glare-opacity 0
-
-  &::after
-    content ''
-    position absolute
-    inset 0
-    border-radius inherit
-    background radial-gradient(circle at var(--glare-x) var(--glare-y), rgba(255, 255, 255, 0.13) 0%, transparent 55%)
-    opacity var(--glare-opacity)
-    transition opacity 0.35s ease
-    pointer-events none
-    z-index 10
+  border 1px solid unquote("color-mix(in srgb, var(--color-primary) 22%, transparent)")
+  background unquote("color-mix(in srgb, var(--color-card) 80%, black 20%)")
+  transition border-color 0.2s ease, box-shadow 0.2s ease
 
   &:hover
-    transition transform 0.08s linear
-    border-color rgba(201, 165, 90, 0.5)
+    border-color unquote("color-mix(in srgb, var(--color-primary) 50%, transparent)")
+    box-shadow unquote("0 8px 24px color-mix(in srgb, var(--color-primary) 10%, transparent)")
 
 .card-body
-  position relative
-  z-index 1
   height 100%
   display flex
   flex-direction column
