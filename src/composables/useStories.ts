@@ -18,7 +18,7 @@ export interface Story {
   id: string
   icon: string
   title: string
-  subtitle: string
+
   shortDescription: string
   description: string
   roles?: Role[]
@@ -26,6 +26,7 @@ export interface Story {
   gallery?: GalleryImage[]
   status: StoryStatus
   level?: number
+  gameDate?: string
 }
 
 export interface Role {
@@ -34,6 +35,13 @@ export interface Role {
   quote: string
   recommendedClasses: string[]
   advantages?: string[]
+  image?: string
+  items?: RoleItem[]
+}
+
+export interface RoleItem {
+  name: string
+  description: string
   image?: string
 }
 

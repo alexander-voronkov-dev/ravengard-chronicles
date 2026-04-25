@@ -1,111 +1,66 @@
 <script setup lang="ts">
 import type { StoryStatus } from '@/composables/useStories'
-import CornerFrame from './CornerFrame.vue'
-import LevelBadge from './LevelBadge.vue'
+import SunCard from '@/ui-kit/SunCard.vue'
+import SunBadge from '@/ui-kit/SunBadge.vue'
+import SunDivider from '@/ui-kit/SunDivider.vue'
+import SunDate from '@/ui-kit/SunDate.vue'
 
 interface StoryCardProps {
   index: number
   icon: string
   title: string
-  subtitle: string
   shortDescription: string
   storyId: string
   status: StoryStatus
   level?: number
+  gameDate?: string
 }
 
 defineProps<StoryCardProps>()
 </script>
 
 <template>
-  <RouterLink :to="`/story/${storyId}`" class="story-card" :class="`story-card--${status}`">
-    <CornerFrame />
+  <RouterLink :to="`/story/${storyId}`" class="card-link" :class="`card-link--${status}`">
+    <SunCard hoverable class="story-card" :color="status === 'completed' ? '#6db87a' : undefined">
+      <h3 class="card-title">{{ title }}</h3>
+      <SunDate v-if="gameDate" :date="gameDate" class="game-date" />
 
-    <!-- <span class="index-badge">{{ index }}</span> -->
-    <span v-if="status === 'completed'" class="completed-badge">✓ Завершено</span>
+      <SunDivider />
 
-    <div class="flex items-center justify-center mb-7">
-      <span class="text-[3.5rem] leading-none text-[var(--color-primary)]" aria-hidden="true">
-        {{ icon }}
-      </span>
-    </div>
+      <div class="text-center text-base leading-relaxed opacity-90 mb-6">
+        {{ shortDescription }}
+      </div>
 
-    <h3 class="card-title">{{ title }}</h3>
-    <p class="subtitle">{{ subtitle }}</p>
+      <SunBadge v-if="status === 'completed'" color="#6db87a" class="completed-badge mt-auto">
+        ✓ Завершено
+      </SunBadge>
 
-    <div class="flex justify-center mb-6">
-      <span
-        class="w-14 h-px bg-gradient-to-r from-transparent via-[var(--color-primary)] to-transparent"
-      />
-    </div>
-
-    <p class="text-center text-base leading-relaxed opacity-90">{{ shortDescription }}</p>
-
-    <LevelBadge v-if="level" :level="level" class="level-badge" />
+      <SunBadge v-else-if="level" class="level-badge mt-auto">
+        Рекомендованный уровень: {{ level }}
+      </SunBadge>
+    </SunCard>
   </RouterLink>
 </template>
 
 <style scoped lang="stylus">
-.story-card
-  position relative
-  min-height 30rem
-  padding 1.5rem 1.6rem 1.8rem
-  background var(--color-card)
-  border 1px solid unquote("color-mix(in srgb, var(--color-primary) 40%, transparent)")
-  border-radius 6px
-  box-shadow 0 14px 34px rgba(0, 0, 0, 0.45)
-  display flex
-  flex-direction column
-  cursor pointer
-  transition transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease
+.card-link
+  display block
 
-  &:hover
-    transform translateY(-4px)
-    border-color unquote("color-mix(in srgb, var(--color-primary) 68%, transparent)")
-    box-shadow 0 18px 34px rgba(0, 0, 0, 0.5), unquote("0 0 0 1px color-mix(in srgb, var(--color-primary) 30%, transparent)"), unquote("0 0 24px color-mix(in srgb, var(--color-primary) 45%, transparent)")
-
-.index-badge
-  position absolute
-  top 1.5rem
-  right 1.6rem
-  width 1.7rem
-  height 1.7rem
-  border-radius 999px
-  border 1px solid unquote("color-mix(in srgb, var(--color-primary) 25%, transparent)")
-  color unquote("color-mix(in srgb, var(--color-text) 55%, var(--color-primary) 45%)")
-  font-size 0.8rem
-  display inline-flex
-  align-items center
-  justify-content center
-
-.story-card--archived
+.card-link--archived
   opacity 0.45
   filter grayscale(0.6)
 
-  &:hover
+  &:deep(.sun-card):hover
     transform translateY(-2px)
     box-shadow 0 10px 24px rgba(0, 0, 0, 0.4)
     border-color unquote("color-mix(in srgb, var(--color-primary) 30%, transparent)")
 
-.story-card--completed
-  border-color unquote("color-mix(in srgb, #6db87a 38%, transparent)")
 
-  &:hover
-    border-color unquote("color-mix(in srgb, #6db87a 65%, transparent)")
-    box-shadow 0 18px 34px rgba(0, 0, 0, 0.5), unquote("0 0 24px color-mix(in srgb, #6db87a 28%, transparent)")
-
-.completed-badge
-  position absolute
-  top 1.45rem
-  left 1.6rem
-  padding 0.2rem 0.55rem
-  border-radius 999px
-  border 1px solid unquote("color-mix(in srgb, #6db87a 45%, transparent)")
-  background unquote("color-mix(in srgb, #6db87a 12%, transparent)")
-  color #6db87a
-  font-size 0.65rem
-  letter-spacing 0.08em
-  font-weight 600
+.story-card
+  height 100%
+  min-height 30rem
+  display flex
+  flex-direction column
 
 .card-title
   font-size clamp(2rem, 3vw, 2.45rem)
@@ -114,16 +69,8 @@ defineProps<StoryCardProps>()
   margin-bottom 0.55rem
   text-wrap balance
 
-.subtitle
-  color unquote("color-mix(in srgb, var(--color-text) 55%, var(--color-primary) 45%)")
+.game-date
+  display block
   text-align center
-  text-transform uppercase
-  letter-spacing 0.17em
-  font-size 0.65rem
-  margin-bottom 1.2rem
-
-.level-badge
-  margin-top auto
-  display flex
-  justify-content center
+  margin-bottom 0.75rem
 </style>

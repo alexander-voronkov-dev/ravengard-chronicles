@@ -15,11 +15,11 @@ const stories = getStories()
         :index="index + 1"
         :icon="story.icon"
         :title="story.title"
-        :subtitle="story.subtitle"
         :short-description="story.shortDescription"
         :story-id="story.id"
         :status="story.status"
         :level="story.level"
+        :game-date="story.gameDate"
       />
     </div>
   </section>

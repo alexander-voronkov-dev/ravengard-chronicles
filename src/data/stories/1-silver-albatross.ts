@@ -6,7 +6,7 @@ export const silverAlbatross: Story = {
   icon: '⚓',
   title: 'Последний рейс\n"Серебряного Альбатроса"',
   level: 5,
-  subtitle: 'THE LAST FLIGHT OF THE SILVER ALBATROSS',
+  gameDate: '12 Уктара 852г.',
   shortDescription:
     'Торговый дирижабль Северной Рудной Компании откликается на сигнал бедствия с отдалённой шахты. Что там произошло?',
   description:

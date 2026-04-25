@@ -1,14 +1,13 @@
 <script setup lang="ts">
 import type { InfoCard } from '@/composables/useStories'
+import SunSectionHeader from '@/ui-kit/SunSectionHeader.vue'
 
 defineProps<{ cards: InfoCard[] }>()
 </script>
 
 <template>
   <section v-if="cards.length" class="mt-11">
-    <div class="flex flex-wrap items-end gap-4 mb-4 border-b border-white/8 pb-2">
-      <h2 class="text-3xl font-bold">Лор</h2>
-    </div>
+    <SunSectionHeader>Лор</SunSectionHeader>
 
     <div class="grid gap-4 grid-cols-3 max-[900px]:grid-cols-2 max-[560px]:grid-cols-1">
       <article

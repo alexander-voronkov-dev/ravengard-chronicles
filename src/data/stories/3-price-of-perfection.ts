@@ -5,7 +5,7 @@ export const priceOfPerfection: Story = {
   status: 'archived',
   icon: '🔪',
   title: 'Цена идеального блюда',
-  subtitle: 'THE PRICE OF PERFECTION',
+
   shortDescription:
     'Гурманы Вингфорда теряют себя после ужина у загадочного повара, чьи блюда дарят совершенство вкуса, но забирают что-то взамен.',
   description:

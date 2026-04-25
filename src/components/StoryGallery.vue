@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { GalleryImage } from '@/composables/useStories'
 import { ref } from 'vue'
+import SunSectionHeader from '@/ui-kit/SunSectionHeader.vue'
 
 defineProps<{ images: GalleryImage[] }>()
 
@@ -19,9 +20,7 @@ function closeLightbox() {
 
 <template>
   <section v-if="images.length" class="mt-11">
-    <div class="flex flex-wrap items-end gap-4 mb-4 border-b border-white/8 pb-2">
-      <h2 class="text-3xl font-bold">Персонажи</h2>
-    </div>
+    <SunSectionHeader>Персонажи</SunSectionHeader>
 
     <div class="gallery">
       <button

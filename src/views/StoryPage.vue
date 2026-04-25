@@ -2,11 +2,13 @@
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 import { useStories } from '@/composables/useStories'
-import StoryRolesSection from '@/components/StoryRolesSection.vue'
+import StoryRolesSection from '@/components/role/StoryRolesSection.vue'
 import StoryInfoCardsSection from '@/components/StoryInfoCardsSection.vue'
 import StoryGallery from '@/components/StoryGallery.vue'
-import CornerFrame from '@/components/CornerFrame.vue'
-import LevelBadge from '@/components/LevelBadge.vue'
+import SunCard from '@/ui-kit/SunCard.vue'
+import SunBadge from '@/ui-kit/SunBadge.vue'
+import SunDivider from '@/ui-kit/SunDivider.vue'
+import SunDate from '@/ui-kit/SunDate.vue'
 
 const { getStories } = useStories()
 const stories = getStories()
@@ -21,17 +23,14 @@ const storyParagraphs = computed(() => story.value?.description.split('\n\n') ??
   <main class="story-page">
     <RouterLink to="/" class="back-link">← Вернуться к историям</RouterLink>
 
-    <article v-if="story" class="article">
-      <CornerFrame />
-
+    <SunCard v-if="story" tag="article">
       <header class="article__header">
-        <div class="article__icon">{{ story.icon }}</div>
         <h1 class="article__title">{{ story.title }}</h1>
-        <p class="article__subtitle">{{ story.subtitle }}</p>
-        <LevelBadge v-if="story.level" :level="story.level" class="article__level" />
+        <SunDate v-if="story.gameDate" :date="story.gameDate" class="article__game-date" />
+        <SunBadge v-if="story.level" class="article__level">Рекомендованный уровень: {{ story.level }}</SunBadge>
       </header>
 
-      <div class="article__separator" />
+      <SunDivider />
 
       <section class="article__content">
         <p v-for="paragraph in storyParagraphs" :key="paragraph">{{ paragraph }}</p>
@@ -40,12 +39,12 @@ const storyParagraphs = computed(() => story.value?.description.split('\n\n') ??
       <StoryGallery v-if="story.gallery" :images="story.gallery" />
       <StoryInfoCardsSection v-if="story.infoCards" :cards="story.infoCards" />
       <StoryRolesSection v-if="story.roles" :roles="story.roles" />
-    </article>
+    </SunCard>
 
-    <section v-else class="article article--missing">
+    <SunCard v-else class="article--missing">
       <h1 class="article__title">История не найдена</h1>
       <p class="article__lead">Возможно, ссылка устарела или была введена с ошибкой.</p>
-    </section>
+    </SunCard>
   </main>
 </template>
 
@@ -68,14 +67,6 @@ const storyParagraphs = computed(() => story.value?.description.split('\n\n') ??
   &:hover
     color var(--color-primary)
 
-.article
-  position relative
-  padding clamp(1.5rem, 4vw, 2.6rem)
-  background linear-gradient(180deg, unquote("color-mix(in srgb, var(--color-card) 92%, black 8%)"), var(--color-card))
-  border 1px solid unquote("color-mix(in srgb, var(--color-primary) 36%, transparent)")
-  border-radius 8px
-  box-shadow 0 22px 40px rgba(0, 0, 0, 0.46), unquote("0 0 30px color-mix(in srgb, var(--color-primary) 14%, transparent)")
-
 .article__header
   text-align center
   margin-bottom 1.2rem
@@ -92,20 +83,14 @@ const storyParagraphs = computed(() => story.value?.description.split('\n\n') ??
   text-wrap balance
   white-space pre-line
 
-.article__subtitle
-  color unquote("color-mix(in srgb, var(--color-text) 55%, var(--color-primary) 45%)")
-  letter-spacing 0.17em
-  text-transform uppercase
-  font-size 0.72rem
+
+.article__game-date
+  display block
+  margin-top 0.5rem
 
 .article__level
   margin-top 0.75rem
 
-.article__separator
-  width min(14rem, 38vw)
-  height 1px
-  margin 0 auto 1.35rem
-  background linear-gradient(to right, transparent, var(--color-primary), transparent)
 
 .article__lead
   color unquote("color-mix(in srgb, var(--color-text) 85%, #000 15%)")
