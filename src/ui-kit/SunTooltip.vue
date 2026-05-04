@@ -15,7 +15,7 @@ import { Tippy } from 'vue-tippy'
 <style>
 /* ─── Box ──────────────────────────────────────────────────── */
 .tippy-box[data-theme~='sun'] {
-  width: 220px;
+  width: auto;
   padding: 0.75rem 0.9rem;
   background: color-mix(in srgb, var(--color-card) 96%, black 4%);
   border: 1px solid color-mix(in srgb, var(--color-primary) 28%, transparent);
