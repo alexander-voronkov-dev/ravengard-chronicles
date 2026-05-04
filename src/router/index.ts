@@ -22,6 +22,11 @@ const router = createRouter({
       name: 'story',
       component: StoryPage,
     },
+    {
+      path: '/map',
+      name: 'map',
+      component: () => import('../features/map/MapView.vue'),
+    },
   ],
 })
 
