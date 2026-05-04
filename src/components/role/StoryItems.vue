@@ -6,7 +6,7 @@ defineProps<{ items: RoleItem[] }>()
 
 <template>
   <div class="inventory">
-    <h3 class="inventory__title">Инвентарь</h3>
+    <!-- <h3 class="inventory__title">Инвентарь</h3> -->
     <div v-for="item in items" :key="item.name" class="item">
       <div class="item__icon">
         <img v-if="item.image" :src="item.image" :alt="item.name" class="item__img" />
