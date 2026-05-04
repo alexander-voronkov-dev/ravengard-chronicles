@@ -12,7 +12,6 @@ export { default as MapStairs }     from './components/MapStairs.vue'
 export { default as MapFireplace }  from './components/MapFireplace.vue'
 export { default as MapCompass }    from './components/MapCompass.vue'
 export { default as MapLabel }      from './components/MapLabel.vue'
-export { default as MapSecretGroup } from './components/MapSecretGroup.vue'
 
 // Example floors
 export { default as MansionFloor1 }   from './floors/MansionFloor1.vue'

@@ -9,14 +9,8 @@ import MapStairs     from '../components/MapStairs.vue'
 import MapFireplace  from '../components/MapFireplace.vue'
 import MapCompass    from '../components/MapCompass.vue'
 import MapLabel      from '../components/MapLabel.vue'
-import MapSecretGroup from '../components/MapSecretGroup.vue'
-
-const props = defineProps<{
-  selected?: string | null
-  showSecrets?: boolean
-}>()
-
-const emit = defineEmits<{ select: [id: string | null] }>()
+const props = defineProps<{ selected?: string | null }>()
+const emit  = defineEmits<{ select: [id: string | null] }>()
 
 function handleSelect(id: string) {
   emit('select', props.selected === id ? null : id)
@@ -24,12 +18,7 @@ function handleSelect(id: string) {
 </script>
 
 <template>
-  <MapFloorPlan
-    name="ВТОРОЙ ЭТАЖ"
-    roman="Pars Secunda"
-    tagline="спальни, библиотека, кладовые"
-    :show-secrets="showSecrets"
-  >
+  <MapFloorPlan name="ВТОРОЙ ЭТАЖ" roman="Pars Secunda" tagline="спальни, библиотека, кладовые">
     <!-- ─── Rooms ─────────────────────────────────────────── -->
     <MapRoom id="gallery" points="200,310 480,310 480,610 200,610" :selected="selected === 'gallery'" @select="handleSelect" />
     <MapRoom id="master"  points="60,470  200,470 200,720 60,720"  :selected="selected === 'master'"  @select="handleSelect" />
@@ -122,19 +111,5 @@ function handleSelect(id: string) {
     <MapCompass :x="620" :y="100" />
     <text x="340" y="755" class="map-stair-text" text-anchor="middle" font-style="italic">— парадный фасад —</text>
 
-    <!-- ─── Secret layer ──────────────────────────────────── -->
-    <MapSecretGroup>
-      <MapRoom
-        id="secret-library"
-        points="195,455 195,468 235,468 235,455"
-        secret
-        :selected="selected === 'secret-library'"
-        @select="handleSelect"
-      />
-      <text x="215" y="463" class="map-secret-label">ПОТАЙНОЙ КАБ.</text>
-      <path d="M 195 460 L 175 460" class="map-secret-passage" />
-      <path d="M 175 460 L 175 540" class="map-secret-passage" />
-      <path d="M 175 540 L 155 540" class="map-secret-passage" />
-    </MapSecretGroup>
   </MapFloorPlan>
 </template>

@@ -6,14 +6,8 @@ import MapDoor       from '../components/MapDoor.vue'
 import MapStairs     from '../components/MapStairs.vue'
 import MapCompass    from '../components/MapCompass.vue'
 import MapLabel      from '../components/MapLabel.vue'
-import MapSecretGroup from '../components/MapSecretGroup.vue'
-
-const props = defineProps<{
-  selected?: string | null
-  showSecrets?: boolean
-}>()
-
-const emit = defineEmits<{ select: [id: string | null] }>()
+const props = defineProps<{ selected?: string | null }>()
+const emit  = defineEmits<{ select: [id: string | null] }>()
 
 function handleSelect(id: string) {
   emit('select', props.selected === id ? null : id)
@@ -21,12 +15,7 @@ function handleSelect(id: string) {
 </script>
 
 <template>
-  <MapFloorPlan
-    name="ПОДВАЛ"
-    roman="Pars Subterranea"
-    tagline="котельная, погреб, склад"
-    :show-secrets="showSecrets"
-  >
+  <MapFloorPlan name="ПОДВАЛ" roman="Pars Subterranea" tagline="котельная, погреб, склад">
     <!-- ─── Hatch fill for exterior earth ─────────────────── -->
     <defs>
       <pattern id="hatch" patternUnits="userSpaceOnUse" width="6" height="6" patternTransform="rotate(45)">
@@ -73,21 +62,5 @@ function handleSelect(id: string) {
     <MapCompass :x="620" :y="100" />
     <text x="340" y="610" class="map-stair-text" text-anchor="middle" font-style="italic">фундамент (без подвальных помещений)</text>
 
-    <!-- ─── Secret layer ──────────────────────────────────── -->
-    <MapSecretGroup>
-      <!-- passage from boiler area up to parlour fireplace -->
-      <path d="M 270 200 L 240 200 L 240 165 L 200 130" class="map-secret-passage" />
-      <text x="220" y="148" class="map-secret-label">↑ к гостиной</text>
-
-      <!-- hidden chamber -->
-      <MapRoom
-        id="secret-room"
-        points="100,440 80,440 80,500 100,500"
-        secret
-        :selected="selected === 'secret-room'"
-        @select="handleSelect"
-      />
-      <text x="90" y="475" class="map-secret-label" transform="rotate(-90 90 475)">ТАЙН. КАМЕРА</text>
-    </MapSecretGroup>
   </MapFloorPlan>
 </template>

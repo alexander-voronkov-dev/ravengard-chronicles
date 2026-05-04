@@ -5,14 +5,13 @@ withDefaults(
     name?: string
     roman?: string
     tagline?: string
-    showSecrets?: boolean
   }>(),
-  { viewBox: '0 0 680 800', showSecrets: false },
+  { viewBox: '0 0 680 800' },
 )
 </script>
 
 <template>
-  <div class="map-sheet" :class="{ 'show-secrets': showSecrets }">
+  <div class="map-sheet">
     <header v-if="name" class="map-sheet__header">
       <span class="map-sheet__name">{{ name }}</span>
       <span v-if="roman" class="map-sheet__roman">{{ roman }}</span>

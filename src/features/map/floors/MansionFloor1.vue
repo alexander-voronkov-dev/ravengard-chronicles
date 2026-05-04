@@ -9,14 +9,9 @@ import MapStairs     from '../components/MapStairs.vue'
 import MapFireplace  from '../components/MapFireplace.vue'
 import MapCompass    from '../components/MapCompass.vue'
 import MapLabel      from '../components/MapLabel.vue'
-import MapSecretGroup from '../components/MapSecretGroup.vue'
 
-const props = defineProps<{
-  selected?: string | null
-  showSecrets?: boolean
-}>()
-
-const emit = defineEmits<{ select: [id: string | null] }>()
+const props = defineProps<{ selected?: string | null }>()
+const emit  = defineEmits<{ select: [id: string | null] }>()
 
 function handleSelect(id: string) {
   emit('select', props.selected === id ? null : id)
@@ -24,12 +19,7 @@ function handleSelect(id: string) {
 </script>
 
 <template>
-  <MapFloorPlan
-    name="ПЕРВЫЙ ЭТАЖ"
-    roman="Pars Prima"
-    tagline="парадные залы, кухня, малый кабинет"
-    :show-secrets="showSecrets"
-  >
+  <MapFloorPlan name="ПЕРВЫЙ ЭТАЖ" roman="Pars Prima" tagline="парадные залы, кухня, малый кабинет">
     <!-- ─── Rooms ─────────────────────────────────────────── -->
     <MapRoom id="entry"   points="240,610 440,610 440,720 240,720" :selected="selected === 'entry'"   @select="handleSelect" />
     <MapRoom id="hall"    points="200,310 480,310 480,610 200,610" :selected="selected === 'hall'"    @select="handleSelect" />
@@ -39,10 +29,8 @@ function handleSelect(id: string) {
     <MapRoom id="kitchen" points="200,150 480,150 480,310 200,310" :selected="selected === 'kitchen'" @select="handleSelect" />
     <MapRoom id="wc1"     points="480,310 540,310 540,400 480,400" :selected="selected === 'wc1'"     @select="handleSelect" />
     <MapRoom id="pantry1" points="540,310 620,310 620,400 540,400" :selected="selected === 'pantry1'" @select="handleSelect" />
-
-    <!-- non-clickable service zones -->
-    <MapRoom id="svc-nw" points="60,150 200,150 200,310 60,310"   inert />
-    <MapRoom id="svc-ne" points="480,400 620,400 620,470 480,470" inert />
+    <MapRoom id="svc-nw"  points="60,150 200,150 200,310 60,310"   inert />
+    <MapRoom id="svc-ne"  points="480,400 620,400 620,470 480,470" inert />
 
     <!-- ─── Walls ─────────────────────────────────────────── -->
     <MapWall thick d="M 60 720 L 60 150 L 620 150 L 620 720 Z" />
@@ -88,7 +76,7 @@ function handleSelect(id: string) {
       <text x="448" y="395" class="map-stair-arrow" text-anchor="middle">▲</text>
       <text x="448" y="490" class="map-stair-text">на II</text>
     </MapStairs>
-    <MapStairs :x="210" :y="170" :w="36" :h="90"  :steps="9">
+    <MapStairs :x="210" :y="170" :w="36" :h="90" :steps="9">
       <text x="228" y="220" class="map-stair-arrow" text-anchor="middle">▼</text>
       <text x="228" y="278" class="map-stair-text">в подв.</text>
     </MapStairs>
@@ -111,11 +99,5 @@ function handleSelect(id: string) {
     <!-- ─── Compass + caption ─────────────────────────────── -->
     <MapCompass :x="620" :y="100" />
     <text x="340" y="755" class="map-stair-text" text-anchor="middle" font-style="italic">— парадный фасад —</text>
-
-    <!-- ─── Secret layer ──────────────────────────────────── -->
-    <MapSecretGroup>
-      <path d="M 100 484 L 100 506 L 80 540" class="map-secret-passage" />
-      <text x="100" y="530" class="map-secret-label">↓ погреб</text>
-    </MapSecretGroup>
   </MapFloorPlan>
 </template>

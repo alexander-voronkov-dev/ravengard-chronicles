@@ -6,7 +6,6 @@ import MansionFloor2  from './floors/MansionFloor2.vue'
 import MansionBasement from './floors/MansionBasement.vue'
 
 const selectedRoom = ref<string | null>(null)
-const showSecrets  = ref(false)
 </script>
 
 <template>
@@ -17,35 +16,15 @@ const showSecrets  = ref(false)
     </header>
 
     <div class="map-view__controls">
-      <button
-        class="map-ctrl-btn"
-        :class="{ active: showSecrets }"
-        @click="showSecrets = !showSecrets"
-      >
-        {{ showSecrets ? '✦ Скрыть тайны' : '✦ Мастерский слой' }}
-      </button>
-      <div class="map-ctrl-divider" />
       <button class="map-ctrl-btn" @click="selectedRoom = null">
         Снять выделение
       </button>
     </div>
 
     <div class="map-view__plans">
-      <MansionFloor1
-        :selected="selectedRoom"
-        :show-secrets="showSecrets"
-        @select="selectedRoom = $event"
-      />
-      <MansionFloor2
-        :selected="selectedRoom"
-        :show-secrets="showSecrets"
-        @select="selectedRoom = $event"
-      />
-      <MansionBasement
-        :selected="selectedRoom"
-        :show-secrets="showSecrets"
-        @select="selectedRoom = $event"
-      />
+      <MansionFloor1   :selected="selectedRoom" @select="selectedRoom = $event" />
+      <MansionFloor2   :selected="selectedRoom" @select="selectedRoom = $event" />
+      <MansionBasement :selected="selectedRoom" @select="selectedRoom = $event" />
     </div>
   </main>
 </template>
@@ -112,11 +91,6 @@ const showSecrets  = ref(false)
     border-color #c9b58a
     color #f1e3c1
 
-.map-ctrl-divider
-  width 1px
-  height 20px
-  background rgba(201,181,138,0.25)
-  margin 0 2px
 
 .map-view__plans
   width 100%
