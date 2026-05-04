@@ -22,22 +22,22 @@ const gap = computed(() => {
     : { x1: x, y1: y - w / 2, x2: x, y2: y + w / 2 }
 })
 
-const arc = computed(() => {
+const leaf = computed(() => {
   const { x, y, w, dir, swing } = props
   if (dir === 'h') {
     return swing === 'down'
-      ? `M ${x - w / 2} ${y} A ${w} ${w} 0 0 1 ${x + w / 2} ${y + w}`
-      : `M ${x - w / 2} ${y} A ${w} ${w} 0 0 0 ${x + w / 2} ${y - w}`
+      ? { x1: x - w / 2, y1: y, x2: x + w / 2, y2: y + w }
+      : { x1: x - w / 2, y1: y, x2: x + w / 2, y2: y - w }
   }
   return swing === 'right'
-    ? `M ${x} ${y - w / 2} A ${w} ${w} 0 0 0 ${x + w} ${y + w / 2}`
-    : `M ${x} ${y - w / 2} A ${w} ${w} 0 0 1 ${x - w} ${y + w / 2}`
+    ? { x1: x, y1: y - w / 2, x2: x + w, y2: y + w / 2 }
+    : { x1: x, y1: y - w / 2, x2: x - w, y2: y + w / 2 }
 })
 </script>
 
 <template>
   <g>
-    <line v-bind="gap" class="map-door-gap" />
-    <path :d="arc" class="map-door-arc" />
+    <line v-bind="gap"  class="map-door-gap" />
+    <!-- <line v-bind="leaf" class="map-door-arc" /> -->
   </g>
 </template>
