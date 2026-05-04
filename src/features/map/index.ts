@@ -14,6 +14,4 @@ export { default as MapCompass }    from './components/MapCompass.vue'
 export { default as MapLabel }      from './components/MapLabel.vue'
 
 // Example floors
-export { default as MansionFloor1 }   from './floors/MansionFloor1.vue'
-export { default as MansionFloor2 }   from './floors/MansionFloor2.vue'
-export { default as MansionBasement } from './floors/MansionBasement.vue'
+export { default as MansionFloor1 } from './floors/MansionFloor1.vue'

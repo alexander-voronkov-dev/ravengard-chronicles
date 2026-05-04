@@ -18,12 +18,8 @@
   stroke: var(--map-ink);
   stroke-width: 2.2;
   stroke-linejoin: round;
-  cursor: pointer;
-  transition: fill 0.2s;
 }
-.map-room:hover       { fill: rgba(255, 220, 160, 0.6); }
-.map-room.selected    { fill: rgba(180, 80, 40, 0.28); stroke: var(--map-wax-red); stroke-width: 2.6; }
-.map-room--inert      { cursor: default; pointer-events: none; }
+.map-room--inert { pointer-events: none; }
 
 /* ─── Walls ───────────────────────────────────────────────── */
 .map-wall       { stroke: var(--map-ink); stroke-width: 2.4; stroke-linecap: square; fill: none; }
