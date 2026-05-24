@@ -4,7 +4,7 @@ const dir = '/ravengard-chronicles/images/dinner-party/'
 
 export const dinnerParty: Story = {
   id: '2',
-  status: 'active',
+  status: 'completed',
   icon: '🕯️',
   title: 'Новогодний маскарад',
   level: 5,
