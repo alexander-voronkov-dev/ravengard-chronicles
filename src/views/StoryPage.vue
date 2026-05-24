@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { computed } from 'vue'
-import { useRoute } from 'vue-router'
+import { computed, watchEffect } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 import { useStories } from '@/composables/useStories'
 import StoryRolesSection from '@/components/role/StoryRolesSection.vue'
 import StoryInfoCardsSection from '@/components/StoryInfoCardsSection.vue'
@@ -10,12 +10,23 @@ import SunBadge from '@/ui-kit/SunBadge.vue'
 import SunDivider from '@/ui-kit/SunDivider.vue'
 import SunDate from '@/ui-kit/SunDate.vue'
 
-const { getStories } = useStories()
-const stories = getStories()
+const { getBranches } = useStories()
+const branches = getBranches()
 
 const route = useRoute()
-const storyId = computed(() => String(route.params.storyId ?? ''))
-const story = computed(() => stories.find((s) => s.id === storyId.value))
+const router = useRouter()
+
+const branchId = computed(() => String(route.params.branchId ?? ''))
+const storyId  = computed(() => String(route.params.storyId  ?? ''))
+const story = computed(() =>
+  branches
+    .find((b) => b.id === branchId.value)
+    ?.stories.find((s) => s.id === storyId.value),
+)
+
+watchEffect(() => {
+  if (story.value === undefined) router.replace('/')
+})
 const storyParagraphs = computed(() => story.value?.description.split('\n\n') ?? [])
 </script>
 

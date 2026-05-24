@@ -10,6 +10,7 @@ interface StoryCardProps {
   icon: string
   title: string
   shortDescription: string
+  branchId: string
   storyId: string
   status: StoryStatus
   level?: number
@@ -20,7 +21,7 @@ defineProps<StoryCardProps>()
 </script>
 
 <template>
-  <RouterLink :to="`/story/${storyId}`" class="card-link" :class="`card-link--${status}`">
+  <RouterLink :to="`/story/${branchId}/${storyId}`" class="card-link" :class="`card-link--${status}`">
     <SunCard hoverable class="story-card" :color="status === 'completed' ? '#6db87a' : undefined">
       <h3 class="card-title">{{ title }}</h3>
       <SunDate v-if="gameDate" :date="gameDate" class="game-date" />

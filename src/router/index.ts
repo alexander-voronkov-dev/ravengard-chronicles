@@ -18,7 +18,7 @@ const router = createRouter({
       component: MainPage,
     },
     {
-      path: '/story/:storyId',
+      path: '/story/:branchId/:storyId',
       name: 'story',
       component: StoryPage,
     },
@@ -27,6 +27,10 @@ const router = createRouter({
     //   name: 'map',
     //   component: () => import('../features/map/MapView.vue'),
     // },
+    {
+      path: '/:pathMatch(.*)*',
+      redirect: '/',
+    },
   ],
 })
 

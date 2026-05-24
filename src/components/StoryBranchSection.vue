@@ -27,6 +27,7 @@ defineProps<{ branch: StoryBranch }>()
         :icon="story.icon"
         :title="story.title"
         :short-description="story.shortDescription"
+        :branch-id="branch.id"
         :story-id="story.id"
         :status="story.status"
         :level="story.level"

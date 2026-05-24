@@ -23,18 +23,23 @@ function closeLightbox() {
     <SunSectionHeader>Персонажи</SunSectionHeader>
 
     <div class="gallery">
-      <button
-        v-for="(image, i) in images"
-        :key="i"
-        class="gallery__item"
-        @click="openLightbox(image)"
-      >
-        <img :src="image.src" :alt="image.alt ?? image.title ?? ''" class="gallery__img" loading="lazy" />
-        <div v-if="image.title || image.description" class="gallery__overlay">
-          <p v-if="image.title" class="gallery__overlay-title">{{ image.title }}</p>
-          <p v-if="image.description" class="gallery__overlay-desc">{{ image.description }}</p>
+      <template v-for="(image, i) in images" :key="i">
+        <button v-if="image.src" class="gallery__item" @click="openLightbox(image)">
+          <img :src="image.src" :alt="image.alt ?? image.title ?? ''" class="gallery__img" loading="lazy" />
+          <div v-if="image.title || image.description" class="gallery__overlay">
+            <p v-if="image.title" class="gallery__overlay-title">{{ image.title }}</p>
+            <p v-if="image.description" class="gallery__overlay-desc">{{ image.description }}</p>
+          </div>
+        </button>
+
+        <div v-else class="gallery__item gallery__item--placeholder">
+          <span class="gallery__placeholder-glyph">?</span>
+          <div v-if="image.title || image.description" class="gallery__overlay gallery__overlay--visible">
+            <p v-if="image.title" class="gallery__overlay-title">{{ image.title }}</p>
+            <p v-if="image.description" class="gallery__overlay-desc">{{ image.description }}</p>
+          </div>
         </div>
-      </button>
+      </template>
     </div>
 
     <Teleport to="body">
@@ -90,6 +95,28 @@ function closeLightbox() {
   width 100%
   height auto
   object-fit cover
+
+.gallery__item--placeholder
+  cursor default
+  aspect-ratio 1
+  background unquote("color-mix(in srgb, var(--color-card) 60%, black 40%)")
+  display flex
+  align-items center
+  justify-content center
+  text-align center
+
+  &:hover
+    border-color unquote("color-mix(in srgb, var(--color-primary) 18%, transparent)")
+    transform none
+
+.gallery__placeholder-glyph
+  font-size 2.5rem
+  color var(--color-primary)
+  opacity 0.25
+  user-select none
+
+.gallery__overlay--visible
+  opacity 1
 
 .gallery__overlay
   position absolute
