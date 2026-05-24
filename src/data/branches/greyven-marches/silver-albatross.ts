@@ -1,7 +1,7 @@
 import type { Story } from '@/composables/useStories'
 
 export const silverAlbatross: Story = {
-  id: '1',
+  id: 'silver-albatross',
   status: 'completed',
   icon: '⚓',
   title: 'Последний рейс\n"Серебряного Альбатроса"',
@@ -33,7 +33,7 @@ export const silverAlbatross: Story = {
       title: 'Серые Зубы',
       description:
         'Горный хребет к северо-востоку от Грейвена. Крутые скалы, непредсказуемые восходящие потоки и частые туманы делают этот район сложным для навигации или проживания. СРК проложила здесь несколько рудных маршрутов, но пилоты эти места недолюбливают.',
-      image: '/ravengard-chronicles/images/2/grayclaw.jpg',
+      image: '/ravengard-chronicles/images/1/grayclaw.jpg',
     },
     {
       title: 'Северная Рудная Компания (СРК)',

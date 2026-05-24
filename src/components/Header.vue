@@ -9,7 +9,7 @@
     </div>
 
     <h1 class="header__title">Хроники Рейвенгарда</h1>
-    <h2 class="header__subtitle">Выбери свой путь</h2>
+    <!-- <h2 class="header__subtitle">Выбери свой путь</h2> -->
   </header>
 </template>
 

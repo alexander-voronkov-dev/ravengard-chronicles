@@ -27,6 +27,15 @@ export interface Story {
   status: StoryStatus
   level?: number
   gameDate?: string
+
+}
+
+export interface StoryBranch {
+  id: string
+  title: string
+  tagline?: string
+  stories: Story[]
+  isComingSoon?: boolean
 }
 
 export interface Role {
@@ -47,18 +56,18 @@ export interface RoleItem {
 
 export type StoryStatus = 'active' | 'completed' | 'archived'
 
-import { silverAlbatross } from '@/data/stories/1-silver-albatross'
-import { dinnerParty } from '@/data/stories/2-dinner-party'
-import { priceOfPerfection } from '@/data/stories/3-price-of-perfection'
-import { greyTaiga } from '@/data/stories/4-grey-taiga'
+import { greyvenMarches } from '@/data/branches/greyven-marches'
+import { grimoireOfBonds } from '@/data/branches/grimoire-of-bonds'
 
 export const useStories = (() => {
-  const stories: Story[] = [silverAlbatross, dinnerParty, priceOfPerfection, greyTaiga]
+  const branches: StoryBranch[] = [greyvenMarches, grimoireOfBonds]
 
   return () => {
-    const getStories = () => stories
+    const getBranches = () => branches
+    const getStories = () => branches.flatMap((b) => b.stories)
 
     return {
+      getBranches,
       getStories,
     }
   }
